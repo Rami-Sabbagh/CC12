@@ -17,7 +17,8 @@ local apis = {
   OSAPI = {"os"},
   PeripheralAPI = {"peripheral"},
   RedstoneAPI = {"redstone","rs"},
-  TermAPI = {"term"}
+  TermAPI = {"term"},
+  LIKOAPI = {"LIKO12"}
 }
 
 if WEB then
