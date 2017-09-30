@@ -86,6 +86,7 @@ return function() --Create new FS API
     local parts = split(path,"/")
     local totalPath = ""
     for k, part in ipairs(parts) do
+      if k == #parts then break end
       totalPath = totalPath.."/"..part
       if not fs.exists(totalPath) then
         fs.makeDir(totalPath)
