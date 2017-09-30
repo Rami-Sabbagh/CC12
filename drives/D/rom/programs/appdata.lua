@@ -1,0 +1,1 @@
+LIKO12.openAppData("/")
