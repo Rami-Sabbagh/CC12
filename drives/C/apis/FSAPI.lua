@@ -96,14 +96,26 @@ return function() --Create new FS API
     end
   end
   
+  --Variable, expected Type, Name
+  local function errHand(v,t,n)
+    if type(v) ~= t then
+      error(n.." should be a "..t.." provided: "..type(v),3)
+    end
+  end
+  
   --Done
   function fs.list(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     return HDD.directoryItems(path)
   end
   
   --Done
   function fs.combine(path, childPath)
+    errHand(path,"string","path")
+    errHand(childPath,"string","childPath")
+    
     path = sanitizePath(path,true)
     childPath = sanitizePath(childPath,true)
     
@@ -118,6 +130,8 @@ return function() --Create new FS API
   
   --Done
   function fs.getName(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path,true)
     if path:len() == 0 then
       return "root"
@@ -133,18 +147,24 @@ return function() --Create new FS API
   
   --Done
   function fs.getSize(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     return HDD.getSize(path)
   end
   
   --Done
   function fs.exists(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     return HDD.exists(path)
   end
   
   --Done
   function fs.isDir(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     if not HDD.exists(path) then return false end
     return HDD.isDirectory(path)
@@ -152,6 +172,8 @@ return function() --Create new FS API
   
   --Done
   function fs.isReadOnly(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     if path:sub(1,3) == "rom" then return true end
     return false
@@ -159,12 +181,17 @@ return function() --Create new FS API
   
   --Done
   function fs.makeDir(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     HDD.newDirectory(path)
   end
   
   --Done
   function fs.move(from,to)
+    errHand(from,"string","fromPath")
+    errHand(from,"string","toPath")
+    
     from = sanitizePath(from)
     to = sanitizePath(to)
     
@@ -197,6 +224,9 @@ return function() --Create new FS API
   
   --Done
   function fs.copy(from,to)
+    errHand(from,"string","fromPath")
+    errHand(to,"string","toPath")
+    
     from = sanitizePath(from)
     to = sanitizePath(to)
     
@@ -224,12 +254,17 @@ return function() --Create new FS API
   
   --Done
   function fs.delete(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     deleteRecursive(path)
   end
   
   --Done
   function fs.open(path,mode)
+    errHand(path,"string","path")
+    errHand(mode,"string","mode")
+    
     path = sanitizePath(path)
     
     local file = {}
@@ -297,6 +332,8 @@ return function() --Create new FS API
   
   --Done
   function fs.getDrive(path)
+    errHand(path,"string","path")
+    
     if fs.isReadOnly(path) then return "rom" else
       return "hdd1"
     end
@@ -331,6 +368,8 @@ return function() --Create new FS API
   
   --Done
   function fs.find(wildPath)
+    errHand(wildPath,"string","wildPath")
+    
     local wildPath = sanitizePath(wildPath, true)
     local results = {}
     recurse_spec(results,'',wildPath)
@@ -368,6 +407,8 @@ return function() --Create new FS API
   
   --Done
   function fs.getDir(path)
+    errHand(path,"string","path")
+    
     path = sanitizePath(path)
     if path:len() == 0 then return ".." end
     
