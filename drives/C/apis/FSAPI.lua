@@ -309,7 +309,36 @@ return function() --Create new FS API
     return drives[drive].size - drives[drive].usage
   end
   
+  local function recurse_spec(results, path, spec)
+    local segment = spec:match('([^/]*)'):gsub('/', '')
+    local pattern = '^' .. segment:gsub("[%.%[%]%(%)%%%+%-%?%^%$]","%%%1"):gsub("%z","%%z"):gsub("%*","[^/]-") .. '$'
+
+    if fs.isDir(path) then
+      for _, file in ipairs(fs.list(path)) do
+        if file:match(pattern) then
+          local f = fs.combine(path, file)
+
+          if spec == segment then
+            table.insert(results, f)
+          end
+          if fs.isDir(f) then
+            recurse_spec(results, f, spec:sub(#segment + 2))
+          end
+        end
+      end
+    end
+  end
+  
   --Done
+  function fs.find(wildPath)
+    local wildPath = sanitizePath(wildPath, true)
+    local results = {}
+    recurse_spec(results,'',wildPath)
+    return results
+  end
+  
+  --DAN200 Version
+  --[[
   function fs.find(wildPath)
     CPU.cprint("[FSAPI]: find -> "..wildPath)
     --Match all the files on the system
@@ -335,6 +364,7 @@ return function() --Create new FS API
     
     return matches
   end
+  ]]
   
   --Done
   function fs.getDir(path)
