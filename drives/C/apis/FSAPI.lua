@@ -71,7 +71,7 @@ return function() --Create new FS API
           --If part length > 255 and it is the last part
           table.insert(output,part:sub(1,255))
         else
-          --Antyhing else we add to the stack
+          --Anyhing else we add to the stack
           table.insert(output,part)
         end
         
@@ -80,6 +80,17 @@ return function() --Create new FS API
     
     --Recombine the output parts into a new string
     return table.concat(output,"/")
+  end
+  
+  local function createPath(path)
+    local parts = split(path,"/")
+    local totalPath = ""
+    for k, part in ipairs(parts) do
+      totalPath = totalPath.."/"..part
+      if not fs.exists(totalPath) then
+        fs.makeDir(totalPath)
+      end
+    end
   end
   
   local function findIn( startDir, matches, wildPattern )
@@ -266,6 +277,8 @@ return function() --Create new FS API
     errHand(mode,"string","mode")
     
     path = sanitizePath(path)
+    
+    createPath(path)
     
     local file = {}
     function file.close() end --nothing :P
