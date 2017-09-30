@@ -49,11 +49,27 @@ setfenv(bios,cg)
 
 local co = coroutine.create(bios)
 
---Remap the palette
---            0 1 2 3  4  5  6  7 8 9  a  b c d e f
-local pmap = {7,9,2,12,10,11,14,5,6,13,15,1,4,3,8,0}
-for c1,c2 in ipairs(pmap) do
-  GPU.pal(c1-1,c2)
+--Upload the palette
+local palette = {
+  {240, 240, 240},
+	{242, 178, 51},
+	{229, 127, 216},
+	{153, 178, 242},
+	{222, 222, 108},
+	{127, 204, 25},
+	{242, 178, 204},
+	{76, 76, 76},
+	{153, 153, 153},
+	{76, 153, 178},
+	{178, 102, 229},
+	{51, 102, 204},
+	{127, 102, 76},
+	{87, 166, 78},
+	{204, 76, 76},
+	{25, 25, 25},
+}
+for k,v in ipairs(palette) do
+  GPU.colorPalette(k-1,unpack(v))
 end
 
 GPU.flip = function() end --Ignore flip :/
