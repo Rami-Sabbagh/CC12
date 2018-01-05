@@ -24,7 +24,7 @@ if not WEB then
   return
 end
 
-color(8) print("\n\nWARNING !\n\nYou are about to replace your current operating system with a new one.\n\nAll of your data will be lost the process !\n\nAre you still sure you want to continue ? (Y/N)\n\n\n",false) color(7)
+color(8) print("\n\nWARNING !\n\nYou are about to replace your current operating system with a new one.\n\nAll of your data will be lost in the process !\n\nAre you still sure you want to continue ? (Y/N)\n\n\n",false) color(7)
 local answer = string.lower(input() or ""); if answer ~= "y" then return end
 
 --Require the JSON library
