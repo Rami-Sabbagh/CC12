@@ -271,29 +271,29 @@ local DPath = TempDir.."drives/D/"
 local toCopyD = index(DPath); drawProgress(0)
 info("Copying "..(#toCopy).." Files & Folders")
 
-for k=#toCopy,1,-1 do
-  local from, to = toCopy[k], "D:/"..toCopy[k]:sub(DPath:len()+1,-1)
+for k=#toCopyD,1,-1 do
+  local from, to = toCopyD[k], "D:/"..toCopyD[k]:sub(DPath:len()+1,-1)
   if fs.isDirectory(from) then
     fs.newDirectory(to) info("New Directory:",to)
   else
     local data = fs.read(from)
     fs.write(to,data) info("Copied File:",to)
   end
-  drawProgress(1 - k/#toCopy)
+  drawProgress(1 - k/#toCopyD)
 end
 
 local toCopyC = index(CPath); drawProgress(0)
-info("Copying "..(#toCopy).." Files & Folders")
+info("Copying "..(#toCopyD).." Files & Folders")
 
-for k=#toCopy,1,-1 do
-  local from, to = toCopy[k], "C:/"..toCopy[k]:sub(CPath:len()+1,-1)
+for k=#toCopyC,1,-1 do
+  local from, to = toCopyC[k], "C:/"..toCopyC[k]:sub(CPath:len()+1,-1)
   if fs.isDirectory(from) then
     fs.newDirectory(to) info("New Directory:",to)
   else
     local data = fs.read(from)
     fs.write(to,data) info("Copied File:",to)
   end
-  drawProgress(1 - k/#toCopy)
+  drawProgress(1 - k/#toCopyC)
 end
 
 status("Installation Complete !") drawProgress()
