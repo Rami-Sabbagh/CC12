@@ -1,4 +1,4 @@
---LIKO-12 DiskOS Edu Edition Downloader By RamiLego4Game
+--LIKO-12 CraftOS Installer By RamiLego4Game
 
 --CONFIG--
 local GithubUsername = "RamiLego4Game" --Your GitHub username as it appears in the URL
