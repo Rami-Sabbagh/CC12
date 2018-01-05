@@ -269,7 +269,7 @@ local CPath = TempDir.."drives/C/"
 local DPath = TempDir.."drives/D/"
 
 local toCopyD = index(DPath); drawProgress(0)
-info("Copying "..(#toCopy).." Files & Folders")
+info("Copying "..(#toCopyD).." Files & Folders")
 
 for k=#toCopyD,1,-1 do
   local from, to = toCopyD[k], "D:/"..toCopyD[k]:sub(DPath:len()+1,-1)
@@ -283,7 +283,7 @@ for k=#toCopyD,1,-1 do
 end
 
 local toCopyC = index(CPath); drawProgress(0)
-info("Copying "..(#toCopyD).." Files & Folders")
+info("Copying "..(#toCopyC).." Files & Folders")
 
 for k=#toCopyC,1,-1 do
   local from, to = toCopyC[k], "C:/"..toCopyC[k]:sub(CPath:len()+1,-1)
