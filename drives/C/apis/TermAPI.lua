@@ -60,6 +60,9 @@ return function() --Create new terminal API
   
   ----------------------------------------------------------------
   
+  local tw, th = GPU.termSize()
+  local fw, fh = GPU.fontSize()
+  
   local btime = 0.5
   local btimer = 0
   local bflag = false
@@ -127,7 +130,8 @@ return function() --Create new terminal API
   --Done
   function term.clear()
     idraw()
-    GPU.clear(cursorColor)
+    GPU.clear(15)
+    GPU.rect(0,0,tw*(fw+1),th*(fh+2),false,cursorColor)
     GPU.flip()
   end
   
