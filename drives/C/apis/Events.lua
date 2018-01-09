@@ -106,4 +106,11 @@ return function() --Hook default events
       events:trigger("mouse_scroll",1,mx,my)
     end
   end)
+  
+  if CPU.isMobile() then
+    events:register("touchpressed",function()
+      Keyboard.textinput(true)
+    end)
+  end
+  
 end
