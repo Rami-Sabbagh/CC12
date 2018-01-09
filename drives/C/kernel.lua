@@ -83,11 +83,7 @@ while true do
   local args = {coroutine.resume(co,unpack(lastargs))}
   if not args[1] then error(tostring(args[2])) end
   if args[2] and args[2]:find(":") then --LIKO-12 Command
-    local y = {}
-    for i=2,#args do
-      table.insert(y,args[i])
-    end
-    lastargs = {coroutine.yield(unpack(y))}
+    lastargs = {coroutine.yield(select(2,unpack(args)))}
   else
     lastargs = events:pullEvent(args[2])
   end
