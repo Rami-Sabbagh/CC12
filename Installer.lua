@@ -13,10 +13,6 @@ local DownloadAttempsDelay = 2  --The delay between each attemp in seconds.
 --The directory where the files will be stored while downloading.
 local TempDir = "C:/.temp/Installer/"
 
---Not working--
---local _LIKO_Version = coroutine.yield("BIOS:GetVersion")
---if _LIKO_Version ~= "0.6.0.7_PRE" then color(8) print("DiskOS-Edu requires LIKO-12 V0.6.0.7_PRE !") return end
-
 --Verify that the WEB peripheral is available.
 if not WEB then
   color(8)
