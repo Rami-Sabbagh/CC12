@@ -131,7 +131,7 @@ return function() --Create new terminal API
   function term.clear()
     idraw()
     GPU.clear(15)
-    GPU.rect(0,0,tw*(fw+1),th*(fh+2),false,cursorColor)
+    GPU.rect(0,0,tw*(fw+1),th*(fh+1),false,cursorColor)
     GPU.flip()
   end
   
@@ -227,10 +227,10 @@ return function() --Create new terminal API
         if bflag then
           local cx,cy = GPU.printCursor()
           local fw,fh = GPU.fontSize()
-          local x,y = cx*(fw+1)+1, cy*(fh+2)+1
-          bsc = GPU.screenshot(x,y,fw+2,fh):image()
+          local x,y = cx*(fw+1)+1, cy*(fh+1)+1
+          bsc = GPU.screenshot(x,y,fw+2,fh-1):image()
           bsc_x, bsc_y = x,y
-          GPU.rect(x,y,fw+1,fh,false,12)
+          GPU.rect(x,y,fw+1,fh-1,false,12)
         end
         btimer = btimer % btime
       end

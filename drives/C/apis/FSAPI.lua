@@ -120,7 +120,7 @@ return function() --Create new FS API
     errHand(path,"string","path")
     
     path = sanitizePath(path)
-    return HDD.directoryItems(path)
+    return HDD.getDirectoryItems(path)
   end
   
   --Done
@@ -220,7 +220,7 @@ return function() --Create new FS API
       HDD.newDirectory(to)
       
       --Copy the source contents into it
-      local files = HDD.directoryItems(from)
+      local files = HDD.getDirectoryItems(from)
       for k,file in ipairs(files) do
         copyRecursive(
           fs.combine(from,file),
@@ -251,16 +251,16 @@ return function() --Create new FS API
     if HDD.isDirectory(path) then
       --Delete a directory:
       
-      local files = HDD.directoryItems(path)
+      local files = HDD.getDirectoryItems(path)
       for k,file in ipairs(files) do
         deleteRecursive(fs.combine(path,file))
       end
       
-      HDD.remove(path) --Delete the directory
+      HDD.delete(path) --Delete the directory
     else
       --Delete a file
       
-      HDD.remove(path)
+      HDD.delete(path)
     end
   end
   

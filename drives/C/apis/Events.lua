@@ -75,7 +75,7 @@ return function() --Hook default events
 
   local fw, fh = GPU.fontSize()
   local function togrid(x,y)
-    return math.floor(x/(fw+1))+1, math.floor(y/(fh+2))+1
+    return math.floor(x/(fw+1))+1, math.floor(y/(fh+1))+1
   end
   
   local mbtn
